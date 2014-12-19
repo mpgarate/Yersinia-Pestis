@@ -13,11 +13,13 @@ var City = function(deathRate, dataset, sliderId) {
 
   $(this.sliderSelector).slider({
     values: [ deathRate ],
+    min: 1.5,
+    max: 50,
     change: function(event, ui){
       console.log("VALUE:");
-      var value = 1 + (ui.value / 100);
+      var value = ui.value;
       console.log(value);
-      city.deathRate = ui.value;
+      city.deathRate = value;
       simulation.drawChart();
     }
   });
@@ -118,12 +120,12 @@ var milanDataset = {
 
 var customDataset = {
   label: "Custom City",
-  fillColor: "rgba(151,187,205,0.2)",
-  strokeColor: "rgba(151,187,205,1)",
-  pointColor: "rgba(151,187,205,1)",
+  fillColor: "rgba(205,151,151,0.2)",
+  strokeColor: "rgba(205,151,151,1)",
+  pointColor: "rgba(205,151,151,1)",
   pointStrokeColor: "#fff",
   pointHighlightFill: "#fff",
-  pointHighlightStroke: "rgba(151,187,205,1)"
+  pointHighlightStroke: "rgba(205,151,151,1)"
 }
 
 var pistoria = new City(35 * 0.1 * 5, pistoriaDataset);
