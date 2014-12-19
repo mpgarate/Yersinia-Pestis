@@ -1,0 +1,16 @@
+{
+    "questions": [
+        {
+            "optionA": {
+              "description": "example description",
+              "deathRateEffect": 1.33,
+              "resultDescription": "example result description"
+            },
+            "optionB": {
+              "description": "example description 1",
+              "deathRateEffect": 1.34,
+              "resultDescription": "example result description 1"
+            }
+        }
+    ]
+}

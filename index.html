@@ -10,11 +10,11 @@
     <link href="lib/css/bootstrap.min.css" rel="stylesheet">
     <!-- Processing -->
     <script src="lib/js/processing.js"></script>
+    <!-- jquery -->
+    <script src="lib/js/jquery-2.1.3.min.js"></script>
 
     <link href="css/styles.css" rel="stylesheet">
 
-
-    <script src="js/models.js"></script>
 
   </head>
   <body>
@@ -31,7 +31,7 @@
       </div>
 
       <div class="row simulator">
-          <canvas data-processing-sources="pde/simulator.pde pde/support.pde"></canvas>
+          <canvas id="simulator" data-processing-sources="pde/simulator.pde"></canvas>
       </div>
 
       <div class="row marketing">
@@ -46,7 +46,5 @@
       </footer>
 
     </div> <!-- /container -->
-
-
   </body>
 </html>
