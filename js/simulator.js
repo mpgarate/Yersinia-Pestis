@@ -25,6 +25,10 @@ City.prototype.getDeathCountList = function(){
   return deaths_list;
 }
 
+$( "#slider" ).slider({
+  values: [ 67 ]
+});
+
 var pistoria = new City(35 * 0.1 * 5);
 var milan = new City(35 * 0.1 * 1);
 
