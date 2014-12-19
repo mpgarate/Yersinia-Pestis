@@ -11,8 +11,9 @@ var City = function(deathRate, dataset, isCustom) {
     return;
   }
 
-  this.params = {"c": 15, "b": 0.1, "y": 5};
+  this.params = {"c": 14, "b": 0.1, "y": 5};
   this.drawParamValues();
+  this.updateDeathRate();
 
   var city = this;
 
@@ -180,7 +181,7 @@ var customDataset = {
   pointHighlightStroke: "rgba(205,151,151,1)"
 }
 
-var pistoria = new City(35 * 0.1 * 5, pistoriaDataset);
+var pistoria = new City(35 * 0.1 * 4.3, pistoriaDataset);
 var milan = new City(35 * 0.1 * 1, milanDataset);
 var customCity = new City(1.5, customDataset, true);
 
