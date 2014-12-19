@@ -7,6 +7,18 @@ body {
     margin-top: 180px;
 }
 
+.color-pistoia {
+    color: rgba(120,120,120,1);
+}
+
+.color-custom {
+    color: rgba(205,151,151, 1);
+}
+
+.color-milan {
+    color: rgba(113, 176, 201, 1);
+}
+
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
