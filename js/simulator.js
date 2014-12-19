@@ -131,11 +131,16 @@ Simulation.prototype.drawChart = function(){
     datasets: datasets
   };
 
+  var chartOptions = {
+    xAxisLabel: "Days",
+    yAxisLabel: "Deaths"
+  }
+
   if (typeof this.chart === "undefined"){
-    this.chart = new Chart(context).Line(data);
+    this.chart = new Chart(context).Line(data, chartOptions);
   } else {
     this.chart.destroy();
-    this.chart = new Chart(context).Line(data);
+    this.chart = new Chart(context).Line(data, chartOptions);
   }
 
   if (this.isCustom){
