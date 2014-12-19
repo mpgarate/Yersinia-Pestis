@@ -1,7 +1,12 @@
-var City = function(deathRate, sliderId, dataset) {
+var City = function(deathRate, dataset, sliderId) {
   this.deathRate = deathRate;
   this.dataset = dataset;
   this.getDeathCountList();
+
+  if (typeof sliderId === 'undefined'){
+    return;
+  }
+
   this.sliderSelector = "#" + sliderId;
 
   var city = this;
@@ -64,14 +69,15 @@ Simulation.prototype.drawChart = function(){
   var context = $("#sim_chart").get(0).getContext("2d");
   var labels = [];
 
-  for (var i = 0; i < this.chartWidth; i++){
-    labels.push(i);
-  }
-
   var datasets = [];
 
   for (var i = 0; i < this.cities.length; i++){
     datasets.push(cities[i].getChartDataset(data));
+  }
+
+  this.updateChartWidth();
+  for (var i = 0; i < this.chartWidth; i++){
+    labels.push(i);
   }
 
   var data = {
@@ -81,7 +87,13 @@ Simulation.prototype.drawChart = function(){
 
   console.log(data);
 
-  var chart = new Chart(context).Line(data);
+  if (typeof this.chart === "undefined"){
+    this.chart = new Chart(context).Line(data);
+  } else {
+    this.chart.destroy();
+    this.chart = new Chart(context).Line(data);
+  }
+
   return chart;
 }
 
@@ -105,10 +117,21 @@ var milanDataset = {
   pointHighlightStroke: "rgba(151,187,205,1)"
 }
 
-var pistoria = new City(35 * 0.1 * 5, "pistoria-slider", pistoriaDataset);
-var milan = new City(35 * 0.1 * 1, "milan-slider", milanDataset);
+var customDataset = {
+  label: "Custom City",
+  fillColor: "rgba(151,187,205,0.2)",
+  strokeColor: "rgba(151,187,205,1)",
+  pointColor: "rgba(151,187,205,1)",
+  pointStrokeColor: "#fff",
+  pointHighlightFill: "#fff",
+  pointHighlightStroke: "rgba(151,187,205,1)"
+}
 
-var cities = [pistoria, milan];
+var pistoria = new City(35 * 0.1 * 5, pistoriaDataset);
+var milan = new City(35 * 0.1 * 1, milanDataset);
+var customCity = new City(1.5, customDataset, "custom-city-slider");
+
+var cities = [pistoria, milan, customCity];
 
 var simulation = new Simulation(cities);
 
