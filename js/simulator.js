@@ -10,14 +10,13 @@ var City = function(deathRate, sliderId, dataset) {
     values: [ deathRate ],
     change: function(event, ui){
       console.log(ui);
-      // simulation.drawChart();
+      city.deathrate = ui.value;
+      simulation.drawChart();
     }
   });
 };
 
 City.prototype.getDeathCountList = function(){
-
-  this.deathrate = $(this.sliderSelector).slider("option", "value");
 
   var population = 100000;
   var deaths = 1;
