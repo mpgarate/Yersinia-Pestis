@@ -10,14 +10,13 @@ var City = function(deathRate, sliderId, dataset) {
     values: [ deathRate ],
     change: function(event, ui){
       console.log(ui);
-      city.deathrate = ui.value;
+      city.deathRate = ui.value;
       simulation.drawChart();
     }
   });
 };
 
 City.prototype.getDeathCountList = function(){
-
   var population = 100000;
   var deaths = 1;
   var generations = 0;
@@ -26,7 +25,8 @@ City.prototype.getDeathCountList = function(){
   deaths_list.push(deaths);
 
   while(population > 0){
-    deaths = Math.ceil(this.deathrate * deaths);
+    console.log(this.deathRate);
+    deaths = Math.ceil(this.deathRate * deaths);
     population = population - deaths;
 
     generations++;
@@ -78,6 +78,8 @@ Simulation.prototype.drawChart = function(){
     labels: labels,
     datasets: datasets
   };
+
+  console.log(data);
 
   var chart = new Chart(context).Line(data);
   return chart;
