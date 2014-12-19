@@ -1,29 +1,72 @@
-var City = function(deathRate, dataset, sliderId) {
+var City = function(deathRate, dataset, isCustom) {
+  if (typeof isCustom === "undefined"){
+    isCustom = false;
+  }
+
   this.deathRate = deathRate;
   this.dataset = dataset;
   this.getDeathCountList();
 
-  if (typeof sliderId === 'undefined'){
+  if (! isCustom){
     return;
   }
 
-  this.sliderSelector = "#" + sliderId;
+  this.params = {"c": 15, "b": 0.1, "y": 5};
+  this.drawParamValues();
 
   var city = this;
 
-  $(this.sliderSelector).slider({
-    values: [ deathRate ],
-    min: 1.5,
+  $("#c-slider").slider({
+    value: city.params["c"],
+    min: 10,
     max: 50,
     change: function(event, ui){
-      console.log("VALUE:");
-      var value = ui.value;
-      console.log(value);
-      city.deathRate = value;
+      city.params.c = ui.value;
+      city.updateDeathRate();
       simulation.drawChart();
+      city.drawParamValues();
     }
   });
+
+  $("#b-slider").slider({
+    value: city.params["b"],
+    min: 11,
+    max: 100,
+    change: function(event, ui){
+      city.params.b = ui.value / 100;
+      city.updateDeathRate();
+      simulation.drawChart();
+      city.drawParamValues();
+    }
+  });
+
+  $("#y-slider").slider({
+    value: city.params["y"],
+    min: 1,
+    max: 50,
+    change: function(event, ui){
+      city.params.y = ui.value;
+      city.updateDeathRate();
+      simulation.drawChart();
+      city.drawParamValues();
+    }
+  });
+
 };
+
+City.prototype.drawParamValues = function(){
+    var params = this.params;
+
+    $(".c-value").html("").html(params["c"]);
+    $(".b-value").html("").html(params["b"]);
+    $(".y-value").html("").html(params["y"]);
+}
+
+City.prototype.updateDeathRate = function(){
+  var params = this.params;
+  console.log(params);
+  this.deathRate = params.c * params. b * params.y;
+}
 
 City.prototype.getDeathCountList = function(){
   var population = 100000;
@@ -95,6 +138,10 @@ Simulation.prototype.drawChart = function(){
     this.chart = new Chart(context).Line(data);
   }
 
+  if (this.isCustom){
+    this.drawParamValues();
+  }
+
   return chart;
 }
 
@@ -130,7 +177,7 @@ var customDataset = {
 
 var pistoria = new City(35 * 0.1 * 5, pistoriaDataset);
 var milan = new City(35 * 0.1 * 1, milanDataset);
-var customCity = new City(1.5, customDataset, "custom-city-slider");
+var customCity = new City(1.5, customDataset, true);
 
 var cities = [pistoria, milan, customCity];
 
