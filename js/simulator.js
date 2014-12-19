@@ -14,7 +14,9 @@ var City = function(deathRate, dataset, sliderId) {
   $(this.sliderSelector).slider({
     values: [ deathRate ],
     change: function(event, ui){
-      console.log(ui);
+      console.log("VALUE:");
+      var value = 1 + (ui.value / 100);
+      console.log(value);
       city.deathRate = ui.value;
       simulation.drawChart();
     }
@@ -30,7 +32,6 @@ City.prototype.getDeathCountList = function(){
   deaths_list.push(deaths);
 
   while(population > 0){
-    console.log(this.deathRate);
     deaths = Math.ceil(this.deathRate * deaths);
     population = population - deaths;
 
@@ -84,8 +85,6 @@ Simulation.prototype.drawChart = function(){
     labels: labels,
     datasets: datasets
   };
-
-  console.log(data);
 
   if (typeof this.chart === "undefined"){
     this.chart = new Chart(context).Line(data);
